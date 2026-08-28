@@ -15,39 +15,48 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Admin setting for the SmartCaptcha site key.
+ * Privacy Subsystem implementation for local_yandexcaptcha.
  *
  * @package    local_yandexcaptcha
  * @copyright  2026 SgtLomzik <lomzike@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_yandexcaptcha;
+namespace local_yandexcaptcha\privacy;
+
+use core_privacy\local\metadata\collection;
 
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Text setting that refuses to be left empty while the captcha is enabled.
+ * Privacy provider.
+ *
+ * The plugin stores nothing itself, but the SmartCaptcha widget sends data to
+ * Yandex Cloud, so the external location has to be declared.
  *
  * @package    local_yandexcaptcha
  * @copyright  2026 SgtLomzik <lomzike@gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class admin_setting_captchatext extends \admin_setting_configtext {
+class provider implements \core_privacy\local\metadata\provider {
 
     /**
-     * Validate the submitted value.
+     * Describe the data sent to Yandex SmartCaptcha.
      *
-     * @param string $data The value to validate.
-     * @return bool|string True if valid, an error message otherwise.
+     * @param collection $collection The initialised collection to add items to.
+     * @return collection The updated collection.
      */
-    public function validate($data) {
-        $enabled = get_config('local_yandexcaptcha', 'enabled');
+    public static function get_metadata(collection $collection): collection {
+        $collection->add_external_location_link(
+            'yandexsmartcaptcha',
+            [
+                'ipaddress' => 'privacy:metadata:yandexsmartcaptcha:ipaddress',
+                'useragent' => 'privacy:metadata:yandexsmartcaptcha:useragent',
+                'token' => 'privacy:metadata:yandexsmartcaptcha:token',
+            ],
+            'privacy:metadata:yandexsmartcaptcha'
+        );
 
-        if ($enabled && trim((string)$data) === '') {
-            return get_string('error_sitekey_required', 'local_yandexcaptcha');
-        }
-
-        return parent::validate($data);
+        return $collection;
     }
 }
