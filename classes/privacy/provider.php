@@ -26,8 +26,6 @@ namespace local_yandexcaptcha\privacy;
 
 use core_privacy\local\metadata\collection;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Privacy provider.
  *
@@ -39,7 +37,6 @@ defined('MOODLE_INTERNAL') || die();
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements \core_privacy\local\metadata\provider {
-
     /**
      * Describe the data sent to Yandex SmartCaptcha.
      *

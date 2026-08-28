@@ -24,8 +24,6 @@
 
 namespace local_yandexcaptcha;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Text setting that refuses to be left empty while the captcha is enabled.
  *
@@ -34,7 +32,6 @@ defined('MOODLE_INTERNAL') || die();
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class admin_setting_captchatext extends \admin_setting_configtext {
-
     /**
      * Validate the submitted value.
      *

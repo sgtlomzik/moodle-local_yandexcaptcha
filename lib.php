@@ -22,8 +22,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Id of the element the captcha widget is rendered into.
  */
@@ -55,8 +53,12 @@ function local_yandexcaptcha_extend_signup_form($mform) {
 
     $sitekey = get_config('local_yandexcaptcha', 'sitekey');
 
-    $mform->addElement('static', 'captcha_container', '',
-        html_writer::div('', '', ['id' => LOCAL_YANDEXCAPTCHA_CONTAINER_ID]));
+    $mform->addElement(
+        'static',
+        'captcha_container',
+        '',
+        html_writer::div('', '', ['id' => LOCAL_YANDEXCAPTCHA_CONTAINER_ID])
+    );
 
     $mform->addElement('hidden', 'smartcaptcha_token', '');
     // The token is an opaque value produced by SmartCaptcha. It is never printed

@@ -37,7 +37,6 @@ require_once($CFG->libdir . '/filelib.php');
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class captcha {
-
     /** @var string Yandex SmartCaptcha validation API endpoint. */
     private const API_URL = 'https://smartcaptcha.yandexcloud.net/validate';
 
