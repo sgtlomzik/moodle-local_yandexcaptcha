@@ -2,6 +2,21 @@
 
 All notable changes to this plugin are documented in this file.
 
+## [1.1.1] - 2026-08-31
+
+### Added
+- The plugin's first test suite, which previously had none.
+- Tests for `lib.php`: when the captcha counts as active, the widget and hidden
+  token added to the signup form, and the validation of a missing, unverifiable
+  or verified token.
+- Tests for the `captcha` class: the refusal to verify while no secret key is
+  configured, and the per-request cache that stops a single-use token being
+  spent twice. No test contacts the SmartCaptcha API.
+- Tests for the site key and secret key settings refusing to be left empty while
+  the captcha is enabled, and accepting an empty value while it is off.
+- Privacy provider tests confirming the SmartCaptcha service is declared as an
+  external location with a language string for every field.
+
 ## [1.1.0] - 2026-08-28
 
 ### Added
